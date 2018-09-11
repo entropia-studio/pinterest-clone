@@ -1,0 +1,14 @@
+<mat-card class="top-menu">
+  <h3>Pinterest Clone FCC</h3>  
+  <button mat-button [matMenuTriggerFor]="menu"><mat-icon color="accent" >menu</mat-icon> Menu</button>  
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/images">All images</button>
+    <button mat-menu-item routerLink="/images">My books</button>  
+  </mat-menu>           
+  <button mat-button routerLink="/login">Login with Github</button>
+  <button mat-button [matMenuTriggerFor]="menuUser" *ngIf="true === false"><mat-icon color="accent" >account_box</mat-icon> user.username</button>
+  <mat-menu #menuUser="matMenu">    
+    <button mat-menu-item routerLink="/images">My images</button>  
+    <button mat-menu-item (click)="logOut()">Logout</button>  
+  </mat-menu>   
+</mat-card>

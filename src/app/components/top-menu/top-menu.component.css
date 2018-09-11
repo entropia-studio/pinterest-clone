@@ -1,0 +1,12 @@
+.top-menu{
+    display: flex;
+    font-size: 1em;    
+    margin-bottom: 0.5em;
+    align-items: center;
+    align-content: center;    
+}
+
+h3{
+    margin-right: 2em;   
+    margin-bottom: 0px;
+}

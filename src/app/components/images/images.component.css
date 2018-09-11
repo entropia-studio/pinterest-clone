@@ -1,0 +1,9 @@
+.grid-list{
+    display: flex;  
+    justify-content: space-between;  
+    flex-wrap: wrap;
+}
+
+.usr-img{
+    width: 15%;  
+  }
