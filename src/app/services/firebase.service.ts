@@ -3,19 +3,12 @@ import { AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/f
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Image } from '../interfaces/image';
 
-
-interface Image {
-  url: string;
-  name: string;
-  user_id: string;  
-}
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 
 export class FirebaseService {
 
@@ -25,7 +18,7 @@ export class FirebaseService {
   constructor(private afs: AngularFirestore ) { }
 
   getImages = ():Observable<Image[]> => {
-    this.imagesCollection = this.afs.collection<Image>('images',ref => ref.orderBy('username','asc'));
+    this.imagesCollection = this.afs.collection<Image>('images',ref => ref.orderBy('date','asc'));
     // Obtain id from the document (metadata)
     return this.imagesCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
