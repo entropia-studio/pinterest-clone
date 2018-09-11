@@ -18,6 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 //Firebase
@@ -43,7 +44,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

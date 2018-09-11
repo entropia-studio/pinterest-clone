@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Image } from '../../interfaces/image';
-
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-images',
   templateUrl: './images.component.html',
@@ -9,7 +9,9 @@ import { Image } from '../../interfaces/image';
 })
 export class ImagesComponent implements OnInit {
 
-  constructor(private fbs: FirebaseService) { }
+  constructor(
+    private fbs: FirebaseService,
+    public snackBar: MatSnackBar) { }
 
   images: Image[];
 
@@ -21,9 +23,21 @@ export class ImagesComponent implements OnInit {
   }
 
   
-  setLike = (image: Image) => {
-    console.log(image);    
+  setLike = (image: Image) => {    
     this.fbs.setLike(image).then();   
   }
+
+  deleteImage = (image: Image) => {
+    this.fbs.deleteImage(image).then(() => {
+      this.openSnackBar(`Image '${image.name}' deleted `,'Ok')
+    });   
+  }
+
+  openSnackBar(message: string, action: string) {    
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+}
+
 
 }

@@ -36,41 +36,44 @@ export class FirebaseService {
   }
 
   // Add or remove like to the image
+  // If the user didn't click before its user_id is add to the links array
+  // If the user clicked before its user_id is remove to the links array
   setLike = (image: Image) : Promise<any> => {    
     this.imageDocument = 
-      this.afs.collection<Image>('images').doc(image.id);  
-    
-    if (image.likes){
+      this.afs.collection<Image>('images').doc(image.id);      
+    if (image.likes){      
       //Search the user within the array to pop from it
-      if (image.likes.indexOf(image.user_id)){
-        image.likes.splice(image.likes.indexOf(image.user_id),1);
-      }
-      console.log('Image setLike',image);
-      return this.imageDocument.update(image);
-    }
-    console.log('this.authService.user.id:',this.authService.user.id)
-    image.likes = [this.authService.user.id];    
-    console.log('Image setLike',image);
+      if (image.likes.indexOf(this.authService.user.id) >= 0){           
+        image.likes.splice(image.likes.indexOf(this.authService.user.id),1);        
+        return this.imageDocument.update(image);
+      }      
+    }    
+    image.likes = [this.authService.user.id];        
     return this.imageDocument.update(image);
   }
 
-      /**
-     * Handle Http operation that failed.
-     * Let the app continue.
-     * @param operation - name of the operation that failed
-     * @param result - optional value to return as the observable result
-     */
-    private handleError<T> (operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-     
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
-     
-        // TODO: better job of transforming error for user consumption
-        console.log(`${operation} failed: ${error.message}`);
-     
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-      };
-    }
+  deleteImage = (image: Image) : Promise<any> => {
+    this.imagesCollection = this.afs.collection<Image>('images');
+    return this.imagesCollection.doc(image.id).delete();    
+  }
+
+  /**
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed
+  * @param result - optional value to return as the observable result
+  */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+    
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+    
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+    
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }

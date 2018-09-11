@@ -5,6 +5,7 @@
       </mat-card-title>
       <mat-card-content>
         <img src="{{image.url}}" width="100%">
+        {{image.user_id}}
       </mat-card-content>
       <mat-card-actions>
         <a (click)="deleteImage(image)" *ngIf="image.user_id"><mat-icon >delete</mat-icon></a>
