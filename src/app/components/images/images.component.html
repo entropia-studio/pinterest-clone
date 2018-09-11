@@ -1,10 +1,20 @@
 <mat-card class="grid-list">  
-    <mat-card class="usr-img">
+    <mat-card class="usr-img" *ngFor="let image of images">
+      <mat-card-title color="warn">
+        {{image.name}}
+      </mat-card-title>
       <mat-card-content>
-        <img src="https://www.portear.com/images/logoPortear300px.jpg" width="100%">
+        <img src="{{image.url}}" width="100%">
       </mat-card-content>
       <mat-card-actions>
-        Delete / Ok
+        <a (click)="deleteImage(image)" *ngIf="image.user_id"><mat-icon >delete</mat-icon></a>
+        <a (click)="setLike(image)">
+          <mat-icon color="warn" *ngIf="image.likes" matBadge="{{image.likes.length}}"
+            matBadgePosition="after" 
+            matBadgeSize="small"  
+            matBadgeColor="warn" >favorite</mat-icon>
+          <mat-icon color="warn" *ngIf="!image.likes" >favorite</mat-icon>
+        </a>       
       </mat-card-actions>
     </mat-card>
 </mat-card>

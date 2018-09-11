@@ -17,6 +17,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -40,7 +42,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
