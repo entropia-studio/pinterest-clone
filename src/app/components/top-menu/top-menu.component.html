@@ -5,7 +5,8 @@
     <button mat-menu-item routerLink="/images">All images</button>
     <button mat-menu-item routerLink="/images">My books</button>  
   </mat-menu>           
-  <button mat-button routerLink="/login">Login with Github - {{user_id}}</button>
+  <button mat-button (click)="loginGithub()">Login with Github - {{user_id}}</button>
+  <button mat-button (click)="logOut()">Logout</button>
   <button mat-button [matMenuTriggerFor]="menuUser" *ngIf="true === false"><mat-icon color="accent" >account_box</mat-icon> user.username</button>
   <mat-menu #menuUser="matMenu">    
     <button mat-menu-item routerLink="/images">My images</button>  

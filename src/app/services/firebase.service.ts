@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { map,catchError } from 'rxjs/operators';
 import { Image } from '../interfaces/image';
-import { AuthService } from './auth.service';
+import { User } from '../interfaces/user';
 
 
 @Injectable({
@@ -14,11 +14,11 @@ import { AuthService } from './auth.service';
 export class FirebaseService {
 
   private imagesCollection: AngularFirestoreCollection<Image>; 
-  private imageDocument: AngularFirestoreDocument<Image>;
+  private imageDocument: AngularFirestoreDocument<Image>;  
+
 
   constructor(
-    private afs: AngularFirestore,
-    private authService: AuthService
+    private afs: AngularFirestore,    
     ) { }
 
   getImages = ():Observable<Image[]> => {
@@ -38,23 +38,31 @@ export class FirebaseService {
   // Add or remove like to the image
   // If the user didn't click before its user_id is add to the links array
   // If the user clicked before its user_id is remove to the links array
-  setLike = (image: Image) : Promise<any> => {    
+  setLike = (image: Image, user_id: string) : Promise<any> => {    
     this.imageDocument = 
       this.afs.collection<Image>('images').doc(image.id);      
     if (image.likes){      
       //Search the user within the array to pop from it
-      if (image.likes.indexOf(this.authService.user.id) >= 0){           
-        image.likes.splice(image.likes.indexOf(this.authService.user.id),1);        
+      if (image.likes.indexOf(user_id) >= 0){           
+        image.likes.splice(image.likes.indexOf(user_id),1);        
         return this.imageDocument.update(image);
       }      
     }    
-    image.likes = [this.authService.user.id];        
+    image.likes = [user_id];        
     return this.imageDocument.update(image);
   }
 
   deleteImage = (image: Image) : Promise<any> => {
     this.imagesCollection = this.afs.collection<Image>('images');
     return this.imagesCollection.doc(image.id).delete();    
+  }
+
+  /** User functions */
+
+  addUser = (user: User ) : Promise<void> => {
+    return this.afs.collection<User>('users').doc(user.id).set(user).then(() => {
+      console.log('User add to document: ',user);
+    });
   }
 
   /**

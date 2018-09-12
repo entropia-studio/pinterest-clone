@@ -10,6 +10,11 @@ import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { ImagesComponent } from './components/images/images.component';
 import { AppRoutingModule } from './app-routing.module';
 
+// Services
+
+import { AuthService } from './services/auth.service';
+import { FirebaseService } from './services/firebase.service';
+
 // Material components
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -24,7 +29,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     BrowserAnimationsModule,  
     AngularFireModule.initializeApp(environment.firebase),   
     AngularFirestoreModule, 
+    AngularFireAuthModule,
     AppRoutingModule,  
     MatCardModule,
     MatButtonModule,
@@ -47,7 +53,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatBadgeModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [FirebaseService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
