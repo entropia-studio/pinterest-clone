@@ -4,10 +4,13 @@ import { Image } from '../../interfaces/image';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
 
+
+
+
 @Component({
   selector: 'app-images',
   templateUrl: './images.component.html',
-  styleUrls: ['./images.component.css']
+  styleUrls: ['../../../../node_modules/ng-masonry-grid/ng-masonry-grid.css']
 })
 export class ImagesComponent implements OnInit {
 
@@ -17,6 +20,14 @@ export class ImagesComponent implements OnInit {
     private authService: AuthService) { }
 
   images: Image[];
+  
+  masonryOptions = {    
+    transitionDuration: '0.8s',    
+    
+    percentPosition: true,
+    columnWidth: '.grid-sizer',
+    itemSelector: '.grid-item'
+  }
 
   ngOnInit() {
     this.fbs.getImages().subscribe(images => {

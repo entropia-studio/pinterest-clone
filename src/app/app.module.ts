@@ -31,6 +31,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
+// Import NgMasonryGridModule
+import { NgMasonryGridModule } from 'ng-masonry-grid';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +43,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,  
+    NgMasonryGridModule,
     AngularFireModule.initializeApp(environment.firebase),   
     AngularFirestoreModule, 
     AngularFireAuthModule,

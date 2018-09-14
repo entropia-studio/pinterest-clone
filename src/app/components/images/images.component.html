@@ -1,21 +1,17 @@
-<mat-card class="grid-list">  
-    <mat-card class="usr-img" *ngFor="let image of images">
-      <mat-card-title color="warn">
-        {{image.name}}
-      </mat-card-title>
-      <mat-card-content>
-        <img src="{{image.url}}" width="100%">
-        {{image.user_id}}
-      </mat-card-content>
-      <mat-card-actions>
-        <a (click)="deleteImage(image)" *ngIf="image.user_id"><mat-icon >delete</mat-icon></a>
-        <a (click)="setLike(image)">
-          <mat-icon color="warn" *ngIf="image.likes" matBadge="{{image.likes.length}}"
-            matBadgePosition="after" 
-            matBadgeSize="small"  
-            matBadgeColor="warn" >favorite</mat-icon>
-          <mat-icon color="warn" *ngIf="!image.likes" >favorite</mat-icon>
-        </a>       
-      </mat-card-actions>
+<div class="container">
+  <ng-masonry-grid 
+                  [masonryOptions]="masonryOptions"
+                  [useAnimation]="true"
+                  [useImagesLoaded]="true"
+                  [scrollAnimationOptions]="{ animationEffect: 'effect-3', minDuration : 0.4, maxDuration : 0.7 }"                
+                  >
+    <!-- Masonry Grid Item -->
+    <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let image of images; let i = index;">       
+      <mat-card>
+      <img src="{{image.url}}" [style.background]=" true ? 'lightBlue':'yellow'" alt="{{image.name}}" class="img-user"/>
+      
     </mat-card>
-</mat-card>
+    </ng-masonry-grid-item>
+  </ng-masonry-grid>
+  </div>
+
