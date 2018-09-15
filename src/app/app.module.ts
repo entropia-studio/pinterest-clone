@@ -33,12 +33,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Import NgMasonryGridModule
 import { NgMasonryGridModule } from 'ng-masonry-grid';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopMenuComponent,
     ImagesComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
                   >
     <!-- Masonry Grid Item -->
     <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let image of images; let i = index;">       
-      <mat-card>
+      <mat-card appHighlight>
       <img src="{{image.url}}" [style.background]=" true ? 'lightBlue':'yellow'" alt="{{image.name}}" class="img-user"/>
       
     </mat-card>
