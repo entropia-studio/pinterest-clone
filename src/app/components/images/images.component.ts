@@ -36,8 +36,7 @@ export class ImagesComponent implements OnInit {
   }
 
   
-  setLike = (image: Image) => {        
-    console.log('user: ',this.authService.user)
+  setLike = (image: Image) => {            
     this.fbs.setLike(image,this.authService.user.id).then();   
   }
 
