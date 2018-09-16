@@ -22,8 +22,7 @@ export class ImagesComponent implements OnInit {
   images: Image[];
   
   masonryOptions = {    
-    transitionDuration: '0.8s',    
-    
+    transitionDuration: '0.8s',        
     percentPosition: true,
     columnWidth: '.grid-sizer',
     itemSelector: '.grid-item'
@@ -37,7 +36,8 @@ export class ImagesComponent implements OnInit {
   }
 
   
-  setLike = (image: Image) => {    
+  setLike = (image: Image) => {        
+    console.log('user: ',this.authService.user)
     this.fbs.setLike(image,this.authService.user.id).then();   
   }
 

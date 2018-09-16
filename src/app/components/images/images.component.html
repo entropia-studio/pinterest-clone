@@ -7,10 +7,19 @@
                   >
     <!-- Masonry Grid Item -->
     <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let image of images; let i = index;">       
-      <mat-card appHighlight>
+      <div appHighlight class="img-div">
       <img src="{{image.url}}" [style.background]=" true ? 'lightBlue':'yellow'" alt="{{image.name}}" class="img-user"/>
-      
-    </mat-card>
+      <mat-card-actions>
+        <a (click)="deleteImage(image)" *ngIf="image.user_id"><mat-icon color="warn" >delete</mat-icon></a>
+        <a (click)="setLike(image)">
+          <mat-icon color="accent" *ngIf="image.likes" matBadge="{{image.likes.length}}"
+            matBadgePosition="after" 
+            matBadgeSize="small"  
+            matBadgeColor="accent" >favorite</mat-icon>
+          <mat-icon color="accent" *ngIf="!image.likes" >favorite</mat-icon>
+        </a>       
+      </mat-card-actions>
+    </div>
     </ng-masonry-grid-item>
   </ng-masonry-grid>
   </div>

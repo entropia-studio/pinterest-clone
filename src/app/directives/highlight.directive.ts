@@ -8,7 +8,7 @@ export class HighlightDirective {
   constructor(private el: ElementRef) { }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('#BDBDBD');
+    this.highlight('#eceff1');
   }
   
   @HostListener('mouseleave') onMouseLeave() {
