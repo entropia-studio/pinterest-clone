@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 
 // Components 
@@ -50,6 +51,8 @@ import { ImageAddComponent } from './components/image-add/image-add.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,  
+    FormsModule,
+    ReactiveFormsModule,
     NgMasonryGridModule,
     AngularFireModule.initializeApp(environment.firebase),   
     AngularFirestoreModule, 

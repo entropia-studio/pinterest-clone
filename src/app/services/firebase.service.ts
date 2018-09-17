@@ -57,6 +57,15 @@ export class FirebaseService {
     return this.imagesCollection.doc(image.id).delete();    
   }
 
+  addImage = (image: Image): Promise<void> => {   
+    this.imagesCollection = this.afs.collection<Image>('images');
+    return this.imagesCollection.add(image).then(() => {                  
+      console.log('Image added')
+    }).catch(error => {
+      console.error("error",error);
+    });
+  }
+
   /** User functions */
 
   addUser = (user: User ) : Promise<void> => {
