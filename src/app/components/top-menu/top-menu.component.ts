@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-top-menu',
@@ -16,11 +16,15 @@ export class TopMenuComponent implements OnInit {
   ) { }  
   
   state: firebase.User;
+  user: User;
+  user_id: string;
 
   ngOnInit() {
     this.afAuth.user.subscribe(state => {
       console.log('State',state);
       this.state = state;
+      this.user_id = this.authService.getGithubId(state.photoURL);  
+      this.user = this.authService.user;      
     })
   }
 
@@ -29,7 +33,7 @@ export class TopMenuComponent implements OnInit {
   }
 
   loginGithub(){
-    this.authService.loginGithub();    
+    this.authService.loginGithub();
   }
 
 }

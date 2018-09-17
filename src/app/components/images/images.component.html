@@ -11,15 +11,15 @@
       <img src="{{image.url}}" alt="{{image.name}}" [className]="'img-user'"/>
         <div [className]="'img-buttons'" >
           <li>
-          <a (click)="deleteImage(image)" *ngIf="image.user_id">
+          <a (click)="deleteImage(image)" *ngIf="image.user_id === false">
             <mat-icon color="warn" >delete</mat-icon>
           </a>
-          <a (click)="setLike(image)">
-            <mat-icon color="accent" *ngIf="image.likes" matBadge="{{image.likes.length}}"
+          <a (click)="setLike(image)" *ngIf="user_id">
+            <mat-icon style="color: #bd081c" *ngIf="image.likes" matBadge="{{image.likes.length}}"
               matBadgePosition="after" 
               matBadgeSize="small"  
               matBadgeColor="accent" >favorite</mat-icon>
-            <mat-icon color="accent" *ngIf="!image.likes" >favorite</mat-icon>
+            <mat-icon style="color: #bd081c" *ngIf="!image.likes" >favorite</mat-icon>
           </a>
           </li>       
         </div>      

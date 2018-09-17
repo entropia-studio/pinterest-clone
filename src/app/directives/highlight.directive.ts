@@ -8,7 +8,7 @@ export class HighlightDirective {
   constructor(private el: ElementRef) { }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('#eceff1');    
+    this.highlight('#efefef');    
     this.el.nativeElement.childNodes[1].style.visibility = 'visible';
   }
   
