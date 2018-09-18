@@ -10,8 +10,8 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-images',
-  templateUrl: './images.component.html',
-  styleUrls: ['../../../../node_modules/ng-masonry-grid/ng-masonry-grid.css']
+  templateUrl: './images.component.html',    
+  styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
 
@@ -30,8 +30,10 @@ export class ImagesComponent implements OnInit {
   masonryOptions = {    
     transitionDuration: '0.8s',        
     percentPosition: true,
-    columnWidth: '.grid-sizer',
-    itemSelector: '.grid-item'
+    columnWidth: '.ng-masonry-grid-item',
+    itemSelector: '.ng-masonry-grid-item',
+    horizontalOrder: false,    
+        
   }
 
   ngOnInit() {

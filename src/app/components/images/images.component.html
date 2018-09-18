@@ -1,30 +1,9 @@
 <div class="container">
-  <ng-masonry-grid 
-                  [masonryOptions]="masonryOptions"
-                  [useAnimation]="true"
-                  [useImagesLoaded]="true"
-                  [scrollAnimationOptions]="{ animationEffect: 'effect-3', minDuration : 0.4, maxDuration : 0.7 }"                
-                  >
-    <!-- Masonry Grid Item -->
-    <ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let image of images; let i = index;">       
-      <div appHighlight [className]="'img-div'">
-      <img src="{{image.url}}" alt="{{image.name}}" [className]="'img-user'"/>
-        <div [className]="'img-buttons'" >
-          <li>
-          <a (click)="deleteImage(image)" *ngIf="image.user_id === false">
-            <mat-icon color="warn" >delete</mat-icon>
-          </a>
-          <a (click)="setLike(image)" *ngIf="user_id">
-            <mat-icon style="color: #bd081c" *ngIf="image.likes" matBadge="{{image.likes.length}}"
-              matBadgePosition="after" 
-              matBadgeSize="small"  
-              matBadgeColor="accent" >favorite</mat-icon>
-            <mat-icon style="color: #bd081c" *ngIf="!image.likes" >favorite</mat-icon>
-          </a>
-          </li>       
-        </div>      
-    </div>
-    </ng-masonry-grid-item>
-  </ng-masonry-grid>
+<div class="masonry">           
+      <div class="brick" *ngFor="let image of images; let i = index;">
+        <img src="{{image.url}}" alt="{{image.name}}" />        
+      </div>    
   </div>
+</div>
+
 
