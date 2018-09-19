@@ -75,4 +75,11 @@
     .masonry {
       column-count: 3;
     }
+	}
+	
+	/* Masonry on x-small screens */
+  @media only screen and (max-width: 539px) and (min-width: 300px) {
+    .masonry {
+      column-count: 2;
+    }
   }

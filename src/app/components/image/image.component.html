@@ -1,3 +1,10 @@
-<p>
-  image works!
-</p>
+<div class="container">
+  <img src="{{data.image.url}}" alt="{{data.image.name}}" class="image" />  
+  <span class="footer">
+    <h3>{{data.image.name}}</h3>
+    <mat-icon style="color: #bd081c" 
+      matBadge="{{data.image.likes.length}}"      
+      matBadgeSize="small"            
+      matBadgeColor="accent" >favorite</mat-icon>    
+  </span>
+</div>

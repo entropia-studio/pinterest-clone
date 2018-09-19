@@ -5,8 +5,6 @@ import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-images',
@@ -20,21 +18,11 @@ export class ImagesComponent implements OnInit {
     public snackBar: MatSnackBar,
     private authService: AuthService,
     public afAuth: AngularFireAuth,
-    private route: ActivatedRoute,    
-    private location: Location
-    ) { }
-
-  images: Image[];
-  user_id: string;  
+    private route: ActivatedRoute,            
+    ) { }   
   
-  masonryOptions = {    
-    transitionDuration: '0.8s',        
-    percentPosition: true,
-    columnWidth: '.ng-masonry-grid-item',
-    itemSelector: '.ng-masonry-grid-item',
-    horizontalOrder: false,    
-        
-  }
+  images: Image[];
+  user_id: string;    
 
   ngOnInit() {
     
@@ -42,9 +30,7 @@ export class ImagesComponent implements OnInit {
 
     this.afAuth.user.subscribe((state) => {                    
       this.user_id = this.authService.getGithubId(state.photoURL);      
-    })
-
-    console.log('user_id',user_id)
+    })   
 
     this.fbs.getImages().subscribe(images => {
       this.images = images; 
@@ -71,7 +57,14 @@ export class ImagesComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 2000,
     });
-}
+  }
+  
+  // Update the image if the URL is broken or not exists
+  updateUrl(i: number){
+    this.images[i].url = './assets/placeholder.png';
+  }
+
+ 
 
 
 }

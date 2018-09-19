@@ -25,7 +25,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 //Firebase
 import { AngularFireModule } from '@angular/fire';
@@ -33,10 +33,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // Import NgMasonryGridModule
-import { NgMasonryGridModule } from 'ng-masonry-grid';
 import { HighlightDirective } from './directives/highlight.directive';
 import { ImageComponent } from './components/image/image.component';
 import { ImageAddComponent } from './components/image-add/image-add.component';
+
 
 
 @NgModule({
@@ -48,12 +48,12 @@ import { ImageAddComponent } from './components/image-add/image-add.component';
     ImageComponent,
     ImageAddComponent,    
   ],
+  entryComponents: [ImageComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,  
     FormsModule,
-    ReactiveFormsModule,
-    NgMasonryGridModule,
+    ReactiveFormsModule,    
     AngularFireModule.initializeApp(environment.firebase),   
     AngularFirestoreModule, 
     AngularFireAuthModule,
@@ -65,9 +65,13 @@ import { ImageAddComponent } from './components/image-add/image-add.component';
     MatMenuModule,
     MatIconModule,
     MatBadgeModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
-  providers: [FirebaseService,AuthService],
+  providers: [
+    FirebaseService,
+    AuthService,    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

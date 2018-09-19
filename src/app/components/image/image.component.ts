@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-image',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    if (!data.image.likes){      
+      data.image.likes = [];
+    }
+  }
 
-  ngOnInit() {
+  ngOnInit() {       
   }
 
 }

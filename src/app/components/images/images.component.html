@@ -1,8 +1,12 @@
 <div class="container">
 <div class="masonry" >           
-    <div class="brick" *ngFor="let image of images; let i = index;" appHighlight>
-      <img src="{{image.url}}" alt="{{image.name}}" />  
-      <div [className]="'img-buttons'" >
+    <div class="brick" *ngFor="let image of images; let i = index;" appHighlight [imageObj]="image">      
+      <img src="{{image.url}}"
+           alt="{{image.name}}"
+           (click)="openImage(image)"
+           (error)="updateUrl(i)"           
+           />        
+      <div [className]="'img-buttons'">
         <li>
         <a (click)="deleteImage(image)" *ngIf="image.user_id === false">
           <mat-icon color="warn" >delete</mat-icon>
@@ -19,5 +23,6 @@
     </div>    
   </div>
 </div>
+
 
 
