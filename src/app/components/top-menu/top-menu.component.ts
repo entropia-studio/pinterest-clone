@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../../interfaces/user';
 
 @Component({
@@ -11,25 +10,20 @@ import { User } from '../../interfaces/user';
 export class TopMenuComponent implements OnInit {
 
   constructor(
-    private authService: AuthService, 
-    public afAuth: AngularFireAuth   
-  ) { }  
+    private authService: AuthService,           
+  ) { }    
   
-  state: firebase.User;
-  user: User;
-  user_id: string;
+  user: User;  
 
   ngOnInit() {
-    this.afAuth.user.subscribe(state => {
-      console.log('State',state);
-      this.state = state;
-      this.user_id = this.authService.getGithubId(state.photoURL);  
-      this.user = this.authService.user;      
-    })
+    this.authService.navState$.subscribe( (user)=> {
+      this.user = user;       
+      console.log('User$: ',this.user)
+    });             
   }
 
   logOut(){
-    this.afAuth.auth.signOut();    
+    this.authService.logout();
   }
 
   loginGithub(){

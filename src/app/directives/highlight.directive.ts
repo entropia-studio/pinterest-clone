@@ -17,14 +17,20 @@ export class HighlightDirective {
     ) { }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('#efefef');    
-    this.el.nativeElement.childNodes[1].style.visibility = 'visible';
+    this.highlight('#efefef');
+    if (this.el.nativeElement.hasOwnProperty('childNodes')){
+      this.el.nativeElement.childNodes[1].style.visibility = 'visible';
+    }    
+    
   }
     
   @HostListener('mouseleave') onMouseLeave() {
     this.highlight(null);
     // Target img-buttons div
-    this.el.nativeElement.childNodes[1].style.visibility = 'hidden';
+    if (this.el.nativeElement.hasOwnProperty('childNodes')){
+      this.el.nativeElement.childNodes[1].style.visibility = 'hidden';
+    }
+    
   }
 
   // Open modal with the image

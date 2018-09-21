@@ -3,30 +3,26 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { User } from '../interfaces/user';
 import { FirebaseService } from './firebase.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  public user: User;
-  
-  /*
-  user = {
-    username: 'entropia-studio',
-    id: '5BHOEjYrYVuO5X1ziKqb',
-    name: 'entropia'
-  }
-  */
+  public user: User;  
 
   constructor(
     public afAuth: AngularFireAuth,
     private firebaseService: FirebaseService
   ) { }
 
+  // Communication with the menu
+  private navStateSource = new Subject<User>();
+  navState$ = this.navStateSource.asObservable();
+
   loginGithub(){
-    this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider()).then(oAuthLoginObj => {
-      console.log('oAuthLoginObj',oAuthLoginObj);
+    this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider()).then(oAuthLoginObj => {      
       
       const gitHubUserId = this.getGithubId(oAuthLoginObj.user.photoURL);     
 
@@ -37,6 +33,7 @@ export class AuthService {
       }
       //Add or rewrite the user to the document
       this.firebaseService.addUser(this.user);
+      this.navStateSource.next(this.user);        
     });    
   }
 
@@ -50,4 +47,14 @@ export class AuthService {
     var m = regex.exec(photoURL);
     return m[2];
   }
+
+  logout() {
+    this.afAuth.auth.signOut().then(() => {      
+      this.user = undefined;
+      this.navStateSource.next(this.user); 
+    });
+
+    
+  }
+
 }

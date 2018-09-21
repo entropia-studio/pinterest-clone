@@ -74,6 +74,11 @@ export class FirebaseService {
     });
   }
 
+   // Returns the user document if exists, if not returns a empty user object
+   getUser = (id: string) : Promise<any> => {    
+    return this.afs.collection<User>('users').doc(id).ref.get();
+  }
+
   /**
   * Handle Http operation that failed.
   * Let the app continue.

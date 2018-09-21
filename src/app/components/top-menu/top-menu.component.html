@@ -1,16 +1,24 @@
 <mat-card class="top-menu">
   <h3>Pinterest Clone FCC</h3>  
-  <button mat-button [matMenuTriggerFor]="menu"><mat-icon color="accent" >menu</mat-icon> Menu</button>  
+  <button mat-button *ngIf="!user" routerLink="/images">
+      <mat-icon color="accent" >camera</mat-icon> Images
+  </button>
+  <button mat-button [matMenuTriggerFor]="menu" *ngIf="user">
+    <mat-icon color="accent" >menu</mat-icon> Menu
+  </button>  
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/images">All images</button>
-    <button mat-menu-item routerLink="/images/{{user_id}}" *ngIf="user_id">My images {{user_id}}</button>  
-    <button mat-menu-item routerLink="/image/add">Add image</button>
+    <button mat-menu-item routerLink="/images">     
+      <mat-icon color="accent" >camera</mat-icon> All images      
+    </button>
+    <button mat-menu-item routerLink="/images/{{user.id}}" *ngIf="user">
+      <mat-icon color="accent" >dashboard</mat-icon> My board 
+    </button>  
+    <button mat-menu-item routerLink="/image/add">      
+      <mat-icon color="accent" >add_photo_alternate</mat-icon> Add image      
+    </button>
   </mat-menu>           
-  <button mat-button (click)="loginGithub()" *ngIf="!state"><mat-icon color="accent" >account_circle</mat-icon> Login with Github</button>
-  <button mat-button (click)="logOut()" *ngIf="state"><span *ngIf="user">{{user.username}} - </span>Logout</button>
-  <button mat-button [matMenuTriggerFor]="menuUser" *ngIf="true === false"><mat-icon color="accent" >account_box</mat-icon> user.username</button>
-  <mat-menu #menuUser="matMenu">    
-    <button mat-menu-item routerLink="/images">My images</button>  
-    <button mat-menu-item (click)="logOut()">Logout</button>  
-  </mat-menu>   
+  <button mat-button (click)="loginGithub()" *ngIf="!user"><mat-icon color="accent" >account_circle</mat-icon> Login with Github</button>
+  <button mat-button (click)="logOut()" *ngIf="user">
+      <mat-icon color="accent" >account_circle</mat-icon> Logout
+  </button>     
 </mat-card>
