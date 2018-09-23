@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { MatDialog } from '@angular/material';
+import { ImageComponent } from '../image/image.component';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class ImagesComponent implements OnInit {
     private authService: AuthService,   
     private afAuth: AngularFireAuth, 
     private route: ActivatedRoute,            
+    public dialog: MatDialog,
     ) { }   
   
   images: Image[];
@@ -49,14 +52,18 @@ export class ImagesComponent implements OnInit {
   }
 
   
-  setLike = (image: Image) => {            
+  setLike = (image: Image, e: Event) => {                 
     this.fbs.setLike(image,this.user_id).then();   
+    // Avoid open image modal window at once
+    e.stopPropagation();    
   }
 
-  deleteImage = (image: Image) => {
+  deleteImage = (image: Image, e: Event) => {
     this.fbs.deleteImage(image).then(() => {
       this.openSnackBar(`Image '${image.name}' deleted `,'Ok')
     });   
+    // Avoid open image modal window at once
+    e.stopPropagation();
   }
 
   openSnackBar(message: string, action: string) {    
@@ -64,13 +71,17 @@ export class ImagesComponent implements OnInit {
       duration: 2000,
     });
   }
-  
+    
   // Update the image if the URL is broken or not exists
   updateUrl(i: number){
     this.images[i].url = './assets/placeholder.png';
   }
 
- 
+  showModal(image: Image){    
+    const dialogRef = this.dialog.open(ImageComponent, {      
+      data: {image: image}
+    });    
+  }
 
 
 }

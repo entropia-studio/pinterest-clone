@@ -1,18 +1,18 @@
 <div class="container">    
 <div class="masonry">           
-    <div class="brick" *ngFor="let image of images; let i = index;" appHighlight [imageObj]="image" [userObj]="user">      
+    <div class="brick" *ngFor="let image of images; let i = index;" appHighlight [imageObj]="image" [userObj]="user" (click)="showModal(image)">      
       <img src="{{image.url}}"
            alt="{{image.name}}"           
            (error)="updateUrl(i)"           
            />        
       <div [className]="'img-buttons'" *ngIf="user">        
         <li *ngIf="user_id === user.id">
-          <a (click)="deleteImage(image)">
+          <a (click)="deleteImage(image,$event)">
             <mat-icon color="warn" >delete</mat-icon>
           </a>
         </li>
         <li *ngIf="user_id !== user.id">
-          <a (click)="setLike(image)">
+          <a (click)="setLike(image,$event)">
             <mat-icon *ngIf="image.likes" matBadge="{{image.likes.length}}"
               matBadgePosition="after" 
               matBadgeSize="small"  

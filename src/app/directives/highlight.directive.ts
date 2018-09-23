@@ -1,9 +1,6 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { Image } from '../interfaces/image';
 import { User } from '../interfaces/user';
-import { MatDialog } from '@angular/material';
-import { ImageComponent } from '../components/image/image.component';
-
 
 @Directive({
   selector: '[appHighlight]'
@@ -14,8 +11,7 @@ export class HighlightDirective {
   @Input() userObj: User;
 
   constructor(
-    private el: ElementRef,
-    public dialog: MatDialog
+    private el: ElementRef,    
     ) { }
 
   @HostListener('mouseenter') onMouseEnter() {
@@ -32,18 +28,7 @@ export class HighlightDirective {
     // Target img-buttons div
     if (this.userObj){
       this.el.nativeElement.childNodes[2].style.visibility = 'hidden';
-    }
-    
-  }
-
-  // Open modal with the image
-  @HostListener('click') onMouseClick() {    
-    const dialogRef = this.dialog.open(ImageComponent, {      
-      data: {image: this.imageObj}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');      
-    });
+    }    
   }
  
   private highlight(color: string) {
