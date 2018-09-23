@@ -5,6 +5,8 @@ import { User } from '../../interfaces/user';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-images',
@@ -16,7 +18,8 @@ export class ImagesComponent implements OnInit {
   constructor(
     private fbs: FirebaseService,
     public snackBar: MatSnackBar,
-    private authService: AuthService,    
+    private authService: AuthService,   
+    private afAuth: AngularFireAuth, 
     private route: ActivatedRoute,            
     ) { }   
   
@@ -25,19 +28,21 @@ export class ImagesComponent implements OnInit {
   user: User;
 
 
-  ngOnInit() {
+  ngOnInit() {    
     
-    const user_id = this.route.snapshot.paramMap.get('user_id');
+    this.user_id = this.route.snapshot.paramMap.get('user_id');
+    
+    this.user = this.authService.user;
 
     this.authService.navState$.subscribe( (user)=> {
-      this.user = user;             
-    });       
+      this.user = user;         
+    });         
 
     this.fbs.getImages().subscribe(images => {
       this.images = images; 
-      if (user_id){        
+      if (this.user_id){        
         this.images = this.images.filter(i => {          
-          return i.user_id === user_id;          
+          return i.user_id === this.user_id;          
         });
       }
     })

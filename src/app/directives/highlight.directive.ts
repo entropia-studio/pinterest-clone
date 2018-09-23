@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { Image } from '../interfaces/image';
+import { User } from '../interfaces/user';
 import { MatDialog } from '@angular/material';
 import { ImageComponent } from '../components/image/image.component';
 
@@ -10,6 +11,7 @@ import { ImageComponent } from '../components/image/image.component';
 export class HighlightDirective {
 
   @Input() imageObj: Image;
+  @Input() userObj: User;
 
   constructor(
     private el: ElementRef,
@@ -17,9 +19,10 @@ export class HighlightDirective {
     ) { }
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('#efefef');
-    if (this.el.nativeElement.hasOwnProperty('childNodes')){
-      this.el.nativeElement.childNodes[1].style.visibility = 'visible';
+    this.highlight('#efefef');       
+    // Target img-buttons div
+    if (this.userObj){
+      this.el.nativeElement.childNodes[2].style.visibility = 'visible';
     }    
     
   }
@@ -27,8 +30,8 @@ export class HighlightDirective {
   @HostListener('mouseleave') onMouseLeave() {
     this.highlight(null);
     // Target img-buttons div
-    if (this.el.nativeElement.hasOwnProperty('childNodes')){
-      this.el.nativeElement.childNodes[1].style.visibility = 'hidden';
+    if (this.userObj){
+      this.el.nativeElement.childNodes[2].style.visibility = 'hidden';
     }
     
   }
@@ -45,13 +48,6 @@ export class HighlightDirective {
  
   private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;    
-  }
-
-  openImage(image: Image){
-    const dialogRef = this.dialog.open(ImageComponent, {      
-      data: {image: this.imageObj}
-    });
-    
-  }
+  } 
 
 }

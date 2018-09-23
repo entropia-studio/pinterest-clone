@@ -70,7 +70,7 @@ export class FirebaseService {
 
   addUser = (user: User ) : Promise<void> => {
     return this.afs.collection<User>('users').doc(user.id).set(user).then(() => {
-      console.log('User add to document: ',user);
+      //console.log('User add to document: ',user);
     });
   }
 

@@ -18,7 +18,7 @@ export class AuthService {
   ) { }
 
   // Communication with the menu
-  private navStateSource = new Subject<User>();
+  public navStateSource = new Subject<User>();
   navState$ = this.navStateSource.asObservable();
 
   loginGithub(){
