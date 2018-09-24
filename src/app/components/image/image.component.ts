@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-image',
@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class ImageComponent implements OnInit {
 
   constructor(
+    public dialogRef: MatDialogRef<ImageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     if (!data.image.likes){      
@@ -17,6 +18,10 @@ export class ImageComponent implements OnInit {
   }
 
   ngOnInit() {       
+  }
+
+  closeDialog(): void{    
+    this.dialogRef.close();    
   }
 
 }

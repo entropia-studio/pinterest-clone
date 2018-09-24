@@ -43,7 +43,8 @@ export class ImageAddComponent implements OnInit {
       url: this.imageForm.get('url').value,
       name: this.imageForm.get('name').value,
       date: new Date(),
-      user_id: this.authService.user.id
+      user_id: this.authService.user.id,
+      username: this.authService.user.username
     }
     this.fbs.addImage(image).then(() => {
       this.router.navigate(['images']);

@@ -1,10 +1,11 @@
 <div class="container">
   <img src="{{data.image.url}}" alt="{{data.image.name}}" class="image"   />  
   <span class="footer">
-    <h3>{{data.image.name}}</h3>
+    <h3>{{data.image.name}} by <a (click)="closeDialog()" routerLink="/images/{{data.image.user_id}}" >{{data.image.username}}</a></h3>
     <mat-icon style="color: #bd081c" 
       matBadge="{{data.image.likes.length}}"      
       matBadgeSize="small"            
       matBadgeColor="accent" >favorite</mat-icon>    
   </span>
+  
 </div>
