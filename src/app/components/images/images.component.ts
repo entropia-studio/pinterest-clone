@@ -70,9 +70,12 @@ export class ImagesComponent implements OnInit {
   }
 
   deleteImage = (image: Image, e: Event) => {
-    this.fbs.deleteImage(image).then(() => {
-      this.openSnackBar(`Image '${image.name}' deleted `,'Ok')
-    });   
+    // Security condition    
+    if (this.user.id === image.user_id){
+      this.fbs.deleteImage(image).then(() => {
+        this.openSnackBar(`Image '${image.name}' deleted `,'Ok')
+      });   
+    }    
     // Avoid open image modal window at once
     e.stopPropagation();
   }
