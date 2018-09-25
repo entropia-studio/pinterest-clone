@@ -36,6 +36,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HighlightDirective } from './directives/highlight.directive';
 import { ImageComponent } from './components/image/image.component';
 import { ImageAddComponent } from './components/image-add/image-add.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -46,7 +47,8 @@ import { ImageAddComponent } from './components/image-add/image-add.component';
     ImagesComponent,
     HighlightDirective,
     ImageComponent,
-    ImageAddComponent,    
+    ImageAddComponent,
+    NotFoundComponent,    
   ],
   entryComponents: [ImageComponent],
   imports: [

@@ -33,11 +33,7 @@ export class ImagesComponent implements OnInit {
   image$: Observable<Image[]>;
 
 
-  ngOnInit() {    
-    
-    //this.user_id = this.route.snapshot.paramMap.get('user_id');
-    
-    //console.log('user_id',this.user_id)
+  ngOnInit() {        
 
     this.user = this.authService.user;
 
@@ -46,9 +42,7 @@ export class ImagesComponent implements OnInit {
       this.getImages();
     })
 
-    this.getImages();
-
-    
+    this.getImages();    
 
     this.authService.navState$.subscribe( (user)=> {
       this.user = user;         
