@@ -4,10 +4,11 @@ import { Image } from '../../interfaces/image';
 import { User } from '../../interfaces/user';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material';
 import { ImageComponent } from '../image/image.component';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -20,27 +21,43 @@ export class ImagesComponent implements OnInit {
   constructor(
     private fbs: FirebaseService,
     public snackBar: MatSnackBar,
-    private authService: AuthService,   
-    private afAuth: AngularFireAuth, 
-    private route: ActivatedRoute,            
+    private authService: AuthService,       
+    private route: ActivatedRoute,      
+    private router: Router,      
     public dialog: MatDialog,
     ) { }   
   
   images: Image[];
   user_id: string; //From params
   user: User;
+  image$: Observable<Image[]>;
 
 
   ngOnInit() {    
     
-    this.user_id = this.route.snapshot.paramMap.get('user_id');
+    //this.user_id = this.route.snapshot.paramMap.get('user_id');
     
+    //console.log('user_id',this.user_id)
+
     this.user = this.authService.user;
+
+    this.route.paramMap.subscribe(paramMap => {    
+      this.user_id = paramMap.get('user_id');
+      this.getImages();
+    })
+
+    this.getImages();
+
+    
 
     this.authService.navState$.subscribe( (user)=> {
       this.user = user;         
     });         
 
+    
+  }
+
+  getImages():void{
     this.fbs.getImages().subscribe(images => {
       this.images = images; 
       if (this.user_id){        
